@@ -13,6 +13,11 @@ app.get('/', (_request, response) => {
 
 app.use('/products', productRouter);
 
+app.use((err, _req, res, _next) => {
+  console.warn(err);
+  return res.status(500);
+});
+
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
 // você deve usar o arquivo index.js para executar sua aplicação 

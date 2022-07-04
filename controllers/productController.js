@@ -12,8 +12,8 @@ const productController = {
   },
 
   create: async (req, res) => {
-    const data = await productService.create(req.body.name);
-    return res.status(201).json(data);
+    const { code, data } = await productService.create(req.body.name);
+    return res.status(code).json(data);
   },
 };
 

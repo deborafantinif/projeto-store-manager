@@ -1,4 +1,11 @@
 const productModel = require('../models/productModel');
+const schemaProduct = require('../schemas/productSchemas');
+const validationStructure = require('../validations/validationStructure');
+
+const validate = (value) => {
+  const error = validationStructure(schemaProduct)(value);
+  if (error) return error;
+};
 
 const productService = {
   getAll: async () => {
@@ -13,8 +20,13 @@ const productService = {
   },
 
   create: async (name) => {
-    const id = await productModel.create(name);
-    return { id, name };
+    const result = validate({ name });
+    if (!result) { 
+      const id = await productModel.create(name);
+      return { code: 201, data: { id, name } };
+    }
+    const { code, message } = result;
+    return { code, data: { message } };
   },
 };
 
