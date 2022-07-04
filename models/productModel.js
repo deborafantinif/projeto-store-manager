@@ -8,8 +8,8 @@ const productModel = {
   },
 
   getById: async (id) => {
-    const sql = 'SELECT * FROM StoreManager.products WHERE id = ?';
-    const [[product]] = await connection.query(sql, id);
+    const sql = 'SELECT * FROM StoreManager.products WHERE id = ?;';
+    const [[product]] = await connection.query(sql, [id]);
     return product;
   },
 };

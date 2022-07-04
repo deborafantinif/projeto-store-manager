@@ -7,7 +7,7 @@ const productController = {
   },
 
   getById: async (req, res) => {
-    const { code, data } = productService.getById(req.id);
+    const { code, data } = await productService.getById(Number(req.params.id));
     return res.status(code).json(data);
   },
 };
