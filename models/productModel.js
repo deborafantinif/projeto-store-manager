@@ -23,6 +23,11 @@ const productModel = {
     const sql = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
     await connection.query(sql, [name, id]);
   },
+
+  remove: async (id) => {
+    const sql = 'DELETE FROM StoreManager.products WHERE id = ?';
+    await connection.query(sql, [id]);
+  },
 };
 
 module.exports = productModel;

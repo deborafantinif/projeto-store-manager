@@ -35,6 +35,13 @@ const productService = {
     await productModel.change(name, id);
     return { code: 200, data: { id, name } };
   },
+
+  remove: async (id) => {
+    const isFoundProduct = await productModel.getById(id);
+    if (!isFoundProduct) return { code: 404, data: { message: 'Product not found' } };
+    await productModel.remove(id);
+    return { code: 204, data: '' };
+  },
 };
 
 module.exports = productService;

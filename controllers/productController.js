@@ -20,6 +20,11 @@ const productController = {
     const { code, data } = await productService.change(req.body.name, Number(req.params.id));
     return res.status(code).json(data);
   },
+
+  remove: async (req, res) => {
+    const { code, data } = await productService.remove(Number(req.params.id));
+    return res.status(code).json(data);
+  },
 };
 
 module.exports = productController;
