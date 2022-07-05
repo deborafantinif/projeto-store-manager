@@ -25,6 +25,11 @@ const productController = {
     const { code, data } = await productService.remove(Number(req.params.id));
     return res.status(code).json(data);
   },
+
+  search: async (req, res) => {
+    const data = await productService.search(req.query.q);
+    return res.json(data);
+  },
 };
 
 module.exports = productController;
