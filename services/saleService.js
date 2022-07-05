@@ -49,8 +49,15 @@ const saleService = {
   },
 
   update: async (id, sales) => {
+    const error = validate(sales);
+    if (error) return { code: error.code, data: { message: error.message } };
+  
     const isFoundSales = await saleModel.getById(id);
     if (isFoundSales.length === 0) return { code: 404, data: { message: 'Sale not found' } };
+
+    const isProductNotFound = await verifyProduct(sales);
+    if (isProductNotFound) return { code: 404, data: { message: 'Product not found' } };
+
     await saleModel.update(id, sales);
     const data = {
       saleId: id,
