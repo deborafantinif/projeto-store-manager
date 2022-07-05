@@ -28,6 +28,13 @@ const productService = {
     const { code, message } = result;
     return { code, data: { message } };
   },
+
+  change: async (name, id) => {
+    const isFoundProduct = await productModel.getById(id);
+    if (!isFoundProduct) return { code: 404, data: { message: 'Product not found' } };
+    await productModel.change(name, id);
+    return { code: 200, data: { id, name } };
+  },
 };
 
 module.exports = productService;
