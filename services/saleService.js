@@ -38,6 +38,17 @@ const saleService = {
     await saleModel.remove(id);
     return { code: 204, data: '' };
   },
+
+  update: async (id, sales) => {
+    const isFoundSales = await saleModel.getById(id);
+    if (isFoundSales.length === 0) return { code: 404, data: { message: 'Sale not found' } };
+    await saleModel.update(id, sales);
+    const data = {
+      saleId: id,
+      itemsUpdated: sales,
+    };
+    return { code: 200, data };
+  },
 };
 
 module.exports = saleService;

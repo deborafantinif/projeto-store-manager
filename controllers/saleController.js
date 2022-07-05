@@ -20,6 +20,11 @@ const saleController = {
     const { code, data } = await saleService.remove(Number(req.params.id));
     return res.status(code).json(data);
   },
+
+  update: async (req, res) => {
+    const { code, data } = await saleService.update(Number(req.params.id), req.body);
+    return res.status(code).json(data);
+  },
 };
 
 module.exports = saleController;
