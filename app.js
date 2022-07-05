@@ -1,5 +1,6 @@
 const express = require('express');
 const productRouter = require('./routes/productRouter');
+const saleRouter = require('./routes/saleRouter');
 require('express-async-errors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/products', productRouter);
+app.use('/sales', saleRouter);
 
 app.use((err, _req, res, _next) => {
   console.warn(err);
