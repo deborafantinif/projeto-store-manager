@@ -31,6 +31,13 @@ const saleService = {
     if (!data.length) return { code: 404, data: { message: 'Sale not found' } };
     return { code: 200, data };
   },
+
+  remove: async (id) => {
+    const data = await saleModel.getById(id);
+    if (!data.length) return { code: 404, data: { message: 'Sale not found' } };
+    await saleModel.remove(id);
+    return { code: 204, data: '' };
+  },
 };
 
 module.exports = saleService;
