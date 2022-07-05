@@ -1,5 +1,7 @@
 const productModel = require('../models/productModel');
 const saleModel = require('../models/saleModel');
+const saleSchema = require('../schemas/saleSchema');
+const validationStructure = require('../validations/validationStructure');
 
 const verifyProduct = async (sales) => {
   const products = await Promise.all(sales.map(async (sale) => {
@@ -9,14 +11,21 @@ const verifyProduct = async (sales) => {
   return products.includes(undefined);
 };
 
+const validate = (value) => {
+  const error = validationStructure(saleSchema)(value);
+  if (error) return error;
+};
+
 const saleService = {
   create: async (sales) => {
+    const error = validate(sales);
+    if (error) return { code: error.code, data: { message: error.message } };
     const isProductNotFound = await verifyProduct(sales);
     if (isProductNotFound) return { code: 404, data: { message: 'Product not found' } };
     const id = await saleModel.create(sales);
     const data = {
       id,
-      itemSold: sales,
+      itemsSold: sales,
     };
     return { code: 201, data };
   },
