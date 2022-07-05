@@ -30,6 +30,8 @@ const productService = {
   },
 
   change: async (name, id) => {
+    const error = validate({ name });
+    if (error) return { code: error.code, data: { message: error.message } };
     const isFoundProduct = await productModel.getById(id);
     if (!isFoundProduct) return { code: 404, data: { message: 'Product not found' } };
     await productModel.change(name, id);
