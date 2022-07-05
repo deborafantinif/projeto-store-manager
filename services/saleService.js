@@ -20,6 +20,17 @@ const saleService = {
     };
     return { code: 201, data };
   },
+
+  getAll: async () => {
+    const data = await saleModel.getAll();
+    return data;
+  },
+
+  getById: async (id) => {
+    const data = await saleModel.getById(id);
+    if (!data.length) return { code: 404, data: { message: 'Sale not found' } };
+    return { code: 200, data };
+  },
 };
 
 module.exports = saleService;
