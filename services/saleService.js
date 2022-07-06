@@ -1,7 +1,7 @@
 const productModel = require('../models/productModel');
 const saleModel = require('../models/saleModel');
 const saleSchema = require('../schemas/saleSchema');
-const validationStructure = require('../validations/validationStructure');
+const { validationStructure } = require('../validations/validationStructure');
 
 const verifyProduct = async (sales) => {
   const products = await Promise.all(sales.map(async (sale) => {

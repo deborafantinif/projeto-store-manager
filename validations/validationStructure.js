@@ -6,4 +6,4 @@ const validationStructure = (schema) => (unknown) => {
   }
 };
 
-module.exports = validationStructure;
+module.exports = { validationStructure };
