@@ -128,6 +128,7 @@ describe('services/productService', () => {
         data: ''
       }
       sinon.stub( productModel, 'getById').resolves(product)
+      sinon.stub( productModel, 'remove').resolves(null)
       expect(await productService.remove(1)).to.be.deep.equal(response)
     })
 

@@ -51,6 +51,7 @@ const saleModel = {
     await connection.query(sqlSalesProducts, [id]);
     await connection.query(sqlSales, [id]);
   },
+
   update: async (id, sales) => {
     const sqlDelete = 'DELETE FROM StoreManager.sales_products WHERE sale_id = ?';
     await connection.query(sqlDelete, [id]);
